@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.16.5"
+          flutter-version: "3.29.0"
           channel: 'stable'
           cache: true
     
@@ -31,7 +31,7 @@ jobs:
           flutter pub get
           
           # Build project
-          flutter build web --release --web-renderer=canvaskit --base-href="/graphify/"
+          flutter build web --release --wasm --base-href="/graphify/"
 
       - name: Deploy to Github Pages
         uses: peaceiris/actions-gh-pages@v3
