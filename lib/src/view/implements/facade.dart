@@ -1,12 +1,8 @@
-
-
-import 'package:graphify/src/controller/interface.dart';
-import 'package:graphify/src/shared/models/interface.dart';
-import 'package:graphify/src/view/interface.dart' as view;
 import 'package:flutter/cupertino.dart';
+import 'package:graphify/src/controller/interface.dart';
+import 'package:graphify/src/view/interface.dart' as view;
 
 class GraphifyView extends StatelessWidget implements view.GraphifyView {
-
   const GraphifyView({
     super.key,
     this.controller,
@@ -17,13 +13,10 @@ class GraphifyView extends StatelessWidget implements view.GraphifyView {
   final GraphifyController? controller;
 
   @override
-  final GraphifyModel? initialOptions;
-
+  final Map<String, dynamic>? initialOptions;
 
   @override
   Widget build(BuildContext context) {
     throw UnimplementedError();
   }
-
-
 }

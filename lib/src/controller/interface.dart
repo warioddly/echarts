@@ -1,15 +1,11 @@
-import 'package:graphify/graphify.dart';
+import 'dart:async';
 
 abstract class GraphifyController {
 
   String identifier = "";
 
-  Future<void> update(GraphifyModel? options);
+  FutureOr<void> update(Map<String, dynamic>? options);
 
-  Future<void> updateSeries(List<GChartModel> series);
-
-  Future<void> dispose();
-
-  // Future<void> updateData(String options);
+  FutureOr<void> dispose();
 
 }

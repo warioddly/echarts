@@ -1,8 +1,4 @@
-
 import 'package:graphify/src/controller/interface.dart' as controller_interface;
-import 'package:graphify/src/shared/models/charts/interface.dart';
-import 'package:graphify/src/shared/models/g_model.dart';
-
 
 class GraphifyController implements controller_interface.GraphifyController {
 
@@ -10,19 +6,12 @@ class GraphifyController implements controller_interface.GraphifyController {
   String identifier = "";
 
   @override
-  Future<void> update(GraphifyModel? options) {
+  Future<void> update(Map<String, dynamic>? options) {
     throw UnimplementedError();
   }
-
 
   @override
   Future<void> dispose() {
-    throw UnimplementedError();
-  }
-
-
-  @override
-  Future<void> updateSeries(List<GChartModel> series) {
     throw UnimplementedError();
   }
 

@@ -1,7 +1,7 @@
 // ignore_for_file: leading_newlines_in_multiline_strings
 
 import 'package:graphify/src/resources/dependencies.js.dart';
-import 'package:graphify/src/resources/scripts.js.dart';
+import 'package:graphify/src/utils/js_methods.dart';
 
 String indexHtml({ required String id, bool enableDependency = true}) {
   return '''<!DOCTYPE html>
@@ -26,7 +26,16 @@ String indexHtml({ required String id, bool enableDependency = true}) {
     <body>
       <div id="chart"></div>
       ${enableDependency ? htmlDependencies : ""}
-      <script>${scriptsJs(id)}</script>
+      <script>
+          const dom = document.getElementById('chart');
+          const context = (window.parent && window.parent.window) || window || {};
+          const chart = context.echarts.init(dom, 'dark', { renderer: 'canvas', useDirtyRect: false });
+          
+          context.${JsMethods.initChart}('$id', chart, {});
+          context.${JsMethods.updateChart}('$id', {});
+          
+          window.addEventListener('resize', chart.resize);
+      </script>
     </body>
     </html>
 ''';

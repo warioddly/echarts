@@ -1,18 +1,16 @@
 import 'dart:html';
 import 'dart:ui_web';
-import 'package:graphify/src/resources/dependencies.js.dart';
-import 'package:graphify/src/resources/index.html.dart';
-import 'package:graphify/src/core/utils/constants.dart';
-import 'package:graphify/src/core/utils/utils.dart';
-import 'package:graphify/src/view/interface.dart' as view_interface;
+
 import 'package:flutter/cupertino.dart';
 import 'package:graphify/src/controller/implements/web.dart';
-import 'package:graphify/src/shared/models/g_model.dart';
+import 'package:graphify/src/resources/dependencies.js.dart';
+import 'package:graphify/src/resources/index.html.dart';
+import 'package:graphify/src/utils/constants.dart';
+import 'package:graphify/src/utils/utils.dart';
+import 'package:graphify/src/view/interface.dart' as view_interface;
 
-
-
-class GraphifyView extends StatefulWidget implements view_interface.GraphifyView {
-
+class GraphifyView extends StatefulWidget
+    implements view_interface.GraphifyView {
   const GraphifyView({
     super.key,
     this.controller,
@@ -23,17 +21,13 @@ class GraphifyView extends StatefulWidget implements view_interface.GraphifyView
   final GraphifyController? controller;
 
   @override
-  final GraphifyModel? initialOptions;
-
+  final Map<String, dynamic>? initialOptions;
 
   @override
   State<StatefulWidget> createState() => _GraphifyViewWeb();
-
 }
 
 class _GraphifyViewWeb extends view_interface.GraphifyViewState<GraphifyView> {
-
-
   late final _controller = widget.controller ?? GraphifyController();
   late IFrameElement iframe;
   var identifier = '';
@@ -46,9 +40,7 @@ class _GraphifyViewWeb extends view_interface.GraphifyViewState<GraphifyView> {
     initChartDependencies();
 
     Future.delayed(Duration.zero, initViewContent);
-
   }
-
 
   @override
   Widget buildView() {
@@ -58,7 +50,6 @@ class _GraphifyViewWeb extends view_interface.GraphifyViewState<GraphifyView> {
       viewType: identifier,
     );
   }
-
 
   IFrameElement createIFrameElement() {
     iframe = IFrameElement()
@@ -70,41 +61,33 @@ class _GraphifyViewWeb extends view_interface.GraphifyViewState<GraphifyView> {
     return iframe;
   }
 
-
   void registerView(String identifier) {
-
     if (identifier.isEmpty) {
       throw FlutterError("identifier is empty");
     }
 
-    platformViewRegistry.registerViewFactory(identifier, (int viewId) => createIFrameElement());
+    platformViewRegistry.registerViewFactory(
+        identifier, (int viewId) => createIFrameElement());
   }
 
-
   void initViewContent() {
-
     if (viewInitialized) {
-
       iframe.srcdoc = indexHtml(
-          id: identifier,
-          enableDependency: false,
+        id: identifier,
+        enableDependency: false,
       );
 
       iframe.onLoad.listen((event) {
         _controller.update(widget.initialOptions);
       });
-
-    }
-    else {
+    } else {
       throw FlutterError('View is not initialized');
     }
-
   }
 
-
   void initChartDependencies() {
-
-    final dependencyScript = window.document.querySelector("#$eChartDependencyId");
+    final dependencyScript =
+        window.document.querySelector("#$eChartDependencyId");
 
     if (dependencyScript == null) {
       final scriptElement = ScriptElement()
@@ -116,15 +99,11 @@ class _GraphifyViewWeb extends view_interface.GraphifyViewState<GraphifyView> {
 
       body?.append(scriptElement);
     }
-
   }
-
 
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
-
-
 }
