@@ -10,9 +10,6 @@
 A Flutter package that serves as a bridge to [Apache ECharts](https://echarts.apache.org/) for creating interactive charts and data visualizations in your Flutter applications.
 
 
-
-
-
 ## Features
 
 - **Apache ECharts Integration:** Leverage the full power of Apache ECharts directly within your Flutter app.

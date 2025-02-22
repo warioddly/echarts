@@ -1,6 +1,6 @@
 name: graphify
 description: "A data visualization charts library, based on Apache Echarts, able to build advanced charts like WebGL 3D, GIS map, etc."
-version: 1.0.3
+version: 1.0.4
 homepage: "https://github.com/warioddly/graphify"
 
 environment:
